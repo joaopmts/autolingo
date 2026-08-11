@@ -1,4 +1,14 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// The engine. Injected by init.js as a real <script> tag so it runs in the
+// page's own JS world, with direct access to Duolingo's React internals
+// (via ReactUtils.js) -- something an isolated-world content script can't
+// reach. Everything user-facing happens here: scanning the skill path for
+// eligible skills, injecting the little start/legendary overlay buttons,
+// the Auto Grind + Legendary polling loop, and handing off actual lesson
+// solving to DuolingoSkill.js / DuolingoChallenge.js. State comes in from
+// init.js as CustomEvents (storage changes, initial state); nothing here
+// talks to chrome.* directly.
 
 import ReactUtils from "./ReactUtils.js"
 import DuolingoSkill from "./DuolingoSkill.js"

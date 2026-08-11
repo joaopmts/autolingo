@@ -1,4 +1,12 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// Duolingo doesn't expose any public API for its lesson/skill data -- it's
+// all just props sitting inside React's internal fiber tree. React stashes
+// a reference to that tree on every DOM node it renders, under a property
+// name that starts with "__reactFiber$" (the random suffix changes per
+// React version/build). This just finds that property by prefix and reads
+// it off, which is how the rest of the extension pulls real skill/challenge
+// data out of the page without Duolingo ever exposing it directly.
 
 export default class ReactUtils {
     constructor () {}

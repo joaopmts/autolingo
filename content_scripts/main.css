@@ -1,3 +1,10 @@
+/* Autolingo -- maintained by joaomtsplay@gmail.com
+ *
+ * Styles for the little start/legendary buttons and tooltips injected.js
+ * appends onto each skill node on the Duolingo path. Popup UI styles are
+ * separate, in ../popup.css.
+ */
+
 .start-autolingo-skill-container {
     position: absolute;
 

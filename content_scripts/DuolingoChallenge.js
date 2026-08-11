@@ -1,4 +1,13 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// Solves exactly ONE challenge screen. On construction it reads the current
+// challenge's data out of React (via window.ru) and figures out its type;
+// `solve()` then dispatches to the matching `solve_*` method below, one per
+// Duolingo challenge type (translate, select, match, tap-cloze, listening,
+// etc.), each of which finds the right answer in the challenge data and
+// simulates picking/typing it through the same React prop callbacks
+// Duolingo's own UI would call. `click_next()` handles clicking through to
+// the next challenge/results screen afterward.
 
 function executeWithDelay(functionToApply, list, delayMs) {
     return new Promise((resolve) => {

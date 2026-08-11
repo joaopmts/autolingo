@@ -1,4 +1,10 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// Renders the popup UI into #content (from popup.html) and is the only
+// place the user's settings get written: every toggle/input here writes
+// straight to chrome.storage.local, which the content scripts pick up via
+// storage.onChanged. Also sends the live "set_delay" message to the active
+// Duolingo tab so a delay change applies without needing a page reload.
 
 var enabled = false;
 var autoGrindEnabled = false;

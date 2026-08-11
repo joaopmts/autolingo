@@ -1,4 +1,11 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// Manifest-registered content script -- runs in the isolated world, so it
+// has chrome.* API access but can't touch Duolingo's own page JavaScript.
+// Its whole job is being the bridge: it injects injected.js into the page's
+// real world, forwards chrome.storage changes and popup messages inward as
+// CustomEvents on `document`, and hands injected.js its one-time initial
+// state (settings + icon assets) when it asks for the extension id.
 
 // injects a file as a <script> tag so it runs with page-level permissions
 // instead of the isolated content script world

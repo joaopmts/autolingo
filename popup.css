@@ -1,4 +1,9 @@
-/* Autolingo -- maintained by joaomtsplay@gmail.com */
+/* Autolingo -- maintained by joaomtsplay@gmail.com
+ *
+ * Styles for the extension popup (popup.html/popup.js) only -- the buttons
+ * Autolingo injects onto the Duolingo page itself are styled separately in
+ * content_scripts/main.css.
+ */
 
 body {
     margin: 0;

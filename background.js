@@ -1,4 +1,9 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// Service worker. The only thing running here is the toolbar badge -- it
+// mirrors "autolingo_enabled" from chrome.storage.local (✓ green when on,
+// "off" grey when not) and makes sure that flag exists with a sane default
+// on first install. Everything else lives in the content scripts.
 
 let previousEnabled = null;
 

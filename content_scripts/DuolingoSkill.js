@@ -1,4 +1,12 @@
 // Autolingo -- maintained by joaomtsplay@gmail.com
+//
+// One lesson or story, start to finish. `start()` clicks the skill open
+// (and the legendary button too, if this is a legendary attempt), then
+// polls the player's React `status` field (LOADING, GUESSING, END_CAROUSEL,
+// etc.) in a loop, reacting to whatever state Duolingo is currently in --
+// creating a DuolingoChallenge to solve the active challenge when needed,
+// or just clicking through splash/recap/ad screens otherwise. It stops
+// itself once the lesson's results screen has been clicked through.
 
 import DuolingoChallenge from "./DuolingoChallenge.js"
 
