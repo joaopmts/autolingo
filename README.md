@@ -37,10 +37,11 @@ Each toggle only unlocks once the one above it is on — Automation → Auto Gri
 ## Project structure
 
 ```
-autolingo_src/
+autolingo/
 ├── manifest.json                    Extension config (Manifest V3)
 ├── background.js                    Service worker — sets the toolbar badge (✓/off)
-├── popup.html / popup.js / popup.css   The extension's popup UI (toggles + delay)
+├── popup/
+│   └── popup.html / popup.js / popup.css   The extension's popup UI (toggles + delay)
 ├── content_scripts/
 │   ├── init.js                      Bridges chrome.* APIs <-> the page (isolated world)
 │   ├── injected.js                  Core logic — path scanning, Auto Grind, Legendary, hotkey-free automation (main world)
@@ -48,7 +49,9 @@ autolingo_src/
 │   ├── DuolingoSkill.js             Drives a whole lesson/story from start to finish
 │   ├── DuolingoChallenge.js         Solves a single challenge (translate, select, match, tap-cloze, etc.)
 │   └── main.css                     Styles for the buttons Autolingo injects onto the path
-└── images/                          Icons + the tier/legendary badges shown on the path
+├── images/                          Icons + the tier/legendary badges shown on the path
+└── docs/
+    └── plan.txt                     Dev TODO notes (not part of the shipped extension)
 ```
 
 **How it fits together:** `manifest.json` auto-runs `init.js` on every `duolingo.com` page. Since content scripts can't touch the page's own JavaScript, `init.js` injects `injected.js` as a real `<script>` tag so it runs in the page's own world with access to Duolingo's React internals (via `ReactUtils.js`). `init.js` and `injected.js` talk to each other through `CustomEvent`s on `document` — `init.js` forwards `chrome.storage` changes and popup messages inward, `injected.js` reports state back out. `injected.js` reads the path's React data to find eligible skills, injects the little overlay buttons, and delegates actually solving a lesson to `DuolingoSkill.js` (which drives the lesson's state machine) and `DuolingoChallenge.js` (which solves each individual challenge by challenge type). `background.js` and `popup.js` only talk to `chrome.storage.local` — that's the single source of truth all the pieces read from.
